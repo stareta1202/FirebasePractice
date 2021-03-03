@@ -60,29 +60,21 @@ class StageThreeViewController: UIViewController {
           if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
             var stage3: Dictionary<String, String>
             stage3 = post["stage3"] as? [String: String] ?? [:]
-            
-            
-            
-            
-            var stars: Dictionary<String, Bool>
-            stars = post["stars"] as? [String : Bool] ?? [:]
-            var starCount = post["starCount"] as? Int ?? 0
-            if let _ = stars[uid] {
-              // Unstar the post and remove self from stars
-              starCount -= 1
-              stars.removeValue(forKey: uid)
+            var userCount = post["userCount"] as? Int ?? 0
+            if let _ = stage3[uid] {
+                userCount -= 1
             } else {
-              // Star the post and add self to stars
-              starCount += 1
-              stars[uid] = true
+                userCount += 1
+                stage3[uid] = "\(userCount)"
             }
-            post["starCount"] = starCount as AnyObject?
-            post["stars"] = stars as AnyObject?
-
-            // Set value and report transaction success
+            post["userCount"] = userCount as AnyObject?
+            post["stage3"] = stage3 as AnyObject?
+            
+            //set value and report transaction success
             currentData.value = post
-
+            
             return TransactionResult.success(withValue: currentData)
+            
           }
           return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
@@ -94,6 +86,8 @@ class StageThreeViewController: UIViewController {
     }
     @objc func printValue() {
         print("hi")
+        self.ref = Database.database().reference()
+        self.ref.child("stage1").child("new").setValue("i changed it from stage3")
     }
     
 
