@@ -28,8 +28,6 @@ class TestPageViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        
-        
         view.add(button) {
             $0.setTitle("updateChildValues", for: .normal)
             $0.backgroundColor = .black
@@ -66,7 +64,6 @@ class TestPageViewController: UIViewController {
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(270)
             }
-            $0.addTarget(self, action: #selector(self.secondAction), for: .touchUpInside)
         }
         view.add(printButton) {
             $0.setTitle("출력버튼", for: .normal)
@@ -75,57 +72,16 @@ class TestPageViewController: UIViewController {
                 make.centerX.equalToSuperview()
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(12)
             }
-            $0.addTarget(self, action: #selector(self.printValue), for: .touchUpInside)
         }
     }
     @objc func action() {
-        var userID = "ssss"
-        var username = "yongjun"
-        var title = " hh"
-        var body = 1234
-        guard let key = ref.child("newchild").childByAutoId().key else { return }
-        let post = ["uid": userID,
-                    "author": username,
-                    "title": title,
-                    "body": body] as [String : Any]
-        let childUpdates = ["/TestPage/\(key)": post]
-        ref.updateChildValues(childUpdates)
-
+        ref.child("stage5/user").setValue(["박준태":"01027444114","정육각":"1234"])
+//        ref.child("stage5/user/박준태").setValue(["01027444114"])
+//        ref.child("stage5/user/정육각").setValue("01027444114")
+        ref.child("stage5/target").setValue(["name":"박준태"])
         
     }
     @objc func secondAction() {
-
-        
-        
-        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-          if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-            var stars: Dictionary<String, Bool>
-            stars = post["stars"] as? [String : Bool] ?? [:]
-            var starCount = post["starCount"] as? Int ?? 0
-            
-            if let _ = stars[uid] {
-              // Unstar the post and remove self from stars
-              starCount -= 1
-              stars.removeValue(forKey: uid)
-            } else {
-              // Star the post and add self to stars
-              starCount += 1
-              stars[uid] = true
-            }
-            post["starCount"] = starCount as AnyObject?
-            post["stars"] = stars as AnyObject?
-
-            // Set value and report transaction success
-            currentData.value = post
-
-            return TransactionResult.success(withValue: currentData)
-          }
-          return TransactionResult.success(withValue: currentData)
-        }) { (error, committed, snapshot) in
-          if let error = error {
-            print(error.localizedDescription)
-          }
-        }
 
     }
     
