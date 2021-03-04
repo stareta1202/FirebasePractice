@@ -20,6 +20,8 @@
 		C938396625EF2D1500F9CE09 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938396525EF2D1500F9CE09 /* LoginViewController.swift */; };
 		C938398C25EF67FE00F9CE09 /* StageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938398B25EF67FE00F9CE09 /* StageTwoViewController.swift */; };
 		C938398F25EF68D100F9CE09 /* StageThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938398E25EF68D100F9CE09 /* StageThreeViewController.swift */; };
+		C93839A325F05B4E00F9CE09 /* StageFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */; };
+		C93839A625F082C500F9CE09 /* TestPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A525F082C500F9CE09 /* TestPageViewController.swift */; };
 		DF3FD3F19EA4BBBC3A99631D /* Pods_YGFirebaseTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		C938396525EF2D1500F9CE09 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C938398B25EF67FE00F9CE09 /* StageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTwoViewController.swift; sourceTree = "<group>"; };
 		C938398E25EF68D100F9CE09 /* StageThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageThreeViewController.swift; sourceTree = "<group>"; };
+		C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageFourViewController.swift; sourceTree = "<group>"; };
+		C93839A525F082C500F9CE09 /* TestPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPageViewController.swift; sourceTree = "<group>"; };
 		E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YGFirebaseTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -116,6 +120,8 @@
 				C938395525EF299F00F9CE09 /* StageOneViewController.swift */,
 				C938398B25EF67FE00F9CE09 /* StageTwoViewController.swift */,
 				C938398E25EF68D100F9CE09 /* StageThreeViewController.swift */,
+				C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */,
+				C93839A525F082C500F9CE09 /* TestPageViewController.swift */,
 			);
 			path = Stage;
 			sourceTree = "<group>";
@@ -248,6 +254,8 @@
 				C938394A25EF24F500F9CE09 /* UIView+ext.swift in Sources */,
 				C938395625EF299F00F9CE09 /* StageOneViewController.swift in Sources */,
 				C938398C25EF67FE00F9CE09 /* StageTwoViewController.swift in Sources */,
+				C93839A625F082C500F9CE09 /* TestPageViewController.swift in Sources */,
+				C93839A325F05B4E00F9CE09 /* StageFourViewController.swift in Sources */,
 				C938398F25EF68D100F9CE09 /* StageThreeViewController.swift in Sources */,
 				C938392725EF1FD700F9CE09 /* ViewController.swift in Sources */,
 				C938392325EF1FD700F9CE09 /* AppDelegate.swift in Sources */,

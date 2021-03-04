@@ -1,18 +1,18 @@
 //
-//  StageThreeViewController.swift
+//  TestPageViewController.swift
 //  YGFirebaseTest
 //
-//  Created by Yongjun Lee on 2021/03/03.
-//
+//  Created by Yongjun Lee on 2021/03/04.
 //
 
 import UIKit
 import SnapKit
 import Firebase
 
-class StageThreeViewController: UIViewController {
+class TestPageViewController: UIViewController {
     var button = UIButton.custumButton()
     var printButton = UIButton.custumButton()
+    var otherButton = UIButton.custumButton()
     var textField = UITextField()
     var otherTextField = UITextField()
     var ref: DatabaseReference!
@@ -26,7 +26,7 @@ class StageThreeViewController: UIViewController {
         ref.child("stage3/setmessage")
         
         view.add(button) {
-            $0.setTitle("키/밸류 버튼", for: .normal)
+            $0.setTitle("updateChildValues", for: .normal)
             $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
@@ -55,7 +55,7 @@ class StageThreeViewController: UIViewController {
 
         }
         view.add(printButton) {
-            $0.setTitle("자동생성 버튼", for: .normal)
+            $0.setTitle("트랜젝션 테스트", for: .normal)
             $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
@@ -65,16 +65,49 @@ class StageThreeViewController: UIViewController {
         }
     }
     @objc func action() {
-
-//        self.ref.child("stage3/setmessage").setValue([otherTextField.text : textField.text])
-        self.ref.child("stage3/setmessage/\(textField.text!)").setValue(otherTextField.text)
+        var userID = "ssss"
+        var username = "yongjun"
+        var title = " hh"
+        var body = 1234
+        guard let key = ref.child("newchild").childByAutoId().key else { return }
+        let post = ["uid": userID,
+                    "author": username,
+                    "title": title,
+                    "body": body] as [String : Any]
+        let childUpdates = ["/TestPage/\(key)": post]
+        ref.updateChildValues(childUpdates)
 
         
     }
     @objc func printValue() {
-        print("hi")
-        ref.child("stage3/setmessage").childByAutoId().setValue(otherTextField.text)
-        
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+          if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+            var stars: Dictionary<String, Bool>
+            stars = post["stars"] as? [String : Bool] ?? [:]
+            var starCount = post["starCount"] as? Int ?? 0
+            if let _ = stars[uid] {
+              // Unstar the post and remove self from stars
+              starCount -= 1
+              stars.removeValue(forKey: uid)
+            } else {
+              // Star the post and add self to stars
+              starCount += 1
+              stars[uid] = true
+            }
+            post["starCount"] = starCount as AnyObject?
+            post["stars"] = stars as AnyObject?
+
+            // Set value and report transaction success
+            currentData.value = post
+
+            return TransactionResult.success(withValue: currentData)
+          }
+          return TransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+          if let error = error {
+            print(error.localizedDescription)
+          }
+        }
     }
     
 
