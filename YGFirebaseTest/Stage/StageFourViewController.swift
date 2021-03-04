@@ -14,9 +14,8 @@ class StageFourViewController: UIViewController {
     var printButton = UIButton.custumButton()
     var textField = UITextField()
     var ref: DatabaseReference!
-    
-
-//    let timeJson:
+    var timer: Timer?
+    var globalCount = 0
     
     
     override func viewDidLoad() {
@@ -32,7 +31,7 @@ class StageFourViewController: UIViewController {
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(12)
             }
-            $0.addTarget(self, action: #selector(self.action), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(self.timerStart(_:)), for: .touchUpInside)
         }
         view.add(textField) {
             $0.placeholder = "값 입력하세요"
@@ -54,51 +53,82 @@ class StageFourViewController: UIViewController {
             $0.addTarget(self, action: #selector(self.printValue), for: .touchUpInside)
         }
     }
-    
-    // 버튼 눌렀을 때
-    @objc func action() {
-        // 파이어베이스에서 시간 분 -> 초에 해당하는 값 받아오기
-//        ref.child("stage4/json").runTransactionBlock { (currentData: MutableData) -> TransactionResult in
-//            if var post = currentData.value as [String : [String : AnyObject]] {
-//
-//            }
-//        }
-    }
-    //
-    @objc func updateVaule() {
-
-    }
-    @objc func printValue() {
-        ref.child("stage4").runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-            var stars: Dictionary<String, Bool>
-            stars = post["stars"] as? [String : Bool] ?? [:]
-            var starCount = post["starCount"] as? Int ?? 0
-            if let _ = stars[uid] {
-              // Unstar the post and remove self from stars
-              starCount -= 1
-              stars.removeValue(forKey: uid)
-            } else {
-              // Star the post and add self to stars
-              starCount += 1
-              stars[uid] = true
+    //타이머 관련
+    @objc func timerStart(_ sender: UIButton) {
+        if let timer = timer {
+            if !timer.isValid {
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.action), userInfo: nil, repeats: true)
             }
-            post["starCount"] = starCount as AnyObject?
-            post["stars"] = stars as AnyObject?
-
-            // Set value and report transaction success
-            currentData.value = post
-
-            return TransactionResult.success(withValue: currentData)
-          }
-          return TransactionResult.success(withValue: currentData)
-        }) { (error, committed, snapshot) in
-          if let error = error {
-            print(error.localizedDescription)
-          }
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.action), userInfo: nil, repeats: true)
         }
     }
+    // 버튼 눌렀을 때
     
+    @objc func action() {
+        globalCount = 1
+        print(globalCount)
+        var minuteFormatter = DateFormatter()
+        var hourFormatter = DateFormatter()
+
+        hourFormatter.dateFormat = "HH"
+        minuteFormatter.dateFormat = "mm"
+        
+        var currentMinuteString = minuteFormatter.string(from: Date())
+        var currentHourString = hourFormatter.string(from: Date())
+        
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+        if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+
+//            print("post:", post)
+
+            var stage4: Dictionary<String, AnyObject>
+            stage4 = post["stage4"] as? [String : AnyObject] ?? [:]
+            
+            var timeJson: Dictionary<String, AnyObject>
+            timeJson = stage4["json"] as? [String: AnyObject] ?? [:]
+            
+            var timeDic: Dictionary<String, Int>
+            timeDic = timeJson[currentHourString] as? [String: Int] ?? [:]
+            
+            var userCount = timeDic[currentMinuteString] as? Int ?? 0
+
+            if let _ = timeDic[currentMinuteString] {
+//                timeDic[currentMinuteString]! += globalCount as Int
+                userCount += 1
+
+            } else {
+                timeDic[currentMinuteString] = 0 as Int
+                userCount += 1
+            }
+            if let _ = stage4[uid] {
+                if let _ = timeJson[currentHourString] {
+                } else {
+                    timeJson[currentHourString] = timeDic as AnyObject
+                }
+            } else {
+                // Star the post and add self to stars
+//                userCount += 1
+//                stage4[uid] = true as AnyObject
+            }
+            timeDic[currentMinuteString]! += self.globalCount as Int
+            timeJson[currentHourString] = timeDic as AnyObject?
+            stage4["json"] = timeJson as AnyObject?
+//            post["userCount"] = userCount as AnyObject?
+            post["stage4"] = stage4 as AnyObject?
+            currentData.value = post
+          return TransactionResult.success(withValue: currentData)
+        }
+        return TransactionResult.success(withValue: currentData)
+      }) { (error, committed, snapshot) in
+        if let error = error {
+          print(error.localizedDescription)
+        }
+      }
+    }
+    @objc func printValue() {
+        print("hi")
+    }
 
 }
 

@@ -11,19 +11,24 @@ import Firebase
 
 class TestPageViewController: UIViewController {
     var button = UIButton.custumButton()
+    var secondButton = UIButton.custumButton()
     var printButton = UIButton.custumButton()
-    var otherButton = UIButton.custumButton()
+    
     var textField = UITextField()
     var otherTextField = UITextField()
     var ref: DatabaseReference!
     
+    var date = Date()
+    var minuteFormatter = DateFormatter()
+    var hourFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
         ref = Database.database().reference()
-        ref.child("stage3/setmessage")
+        
+        
         
         view.add(button) {
             $0.setTitle("updateChildValues", for: .normal)
@@ -54,12 +59,21 @@ class TestPageViewController: UIViewController {
             }
 
         }
-        view.add(printButton) {
-            $0.setTitle("트랜젝션 테스트", for: .normal)
+        view.add(secondButton) {
+            $0.setTitle("트랜젝션 텟", for: .normal)
             $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(270)
+            }
+            $0.addTarget(self, action: #selector(self.secondAction), for: .touchUpInside)
+        }
+        view.add(printButton) {
+            $0.setTitle("출력버튼", for: .normal)
+            $0.backgroundColor = .black
+            $0.snp.makeConstraints { (make) in
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(12)
             }
             $0.addTarget(self, action: #selector(self.printValue), for: .touchUpInside)
         }
@@ -79,12 +93,16 @@ class TestPageViewController: UIViewController {
 
         
     }
-    @objc func printValue() {
+    @objc func secondAction() {
+
+        
+        
         ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
           if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
             var stars: Dictionary<String, Bool>
             stars = post["stars"] as? [String : Bool] ?? [:]
             var starCount = post["starCount"] as? Int ?? 0
+            
             if let _ = stars[uid] {
               // Unstar the post and remove self from stars
               starCount -= 1
@@ -108,6 +126,65 @@ class TestPageViewController: UIViewController {
             print(error.localizedDescription)
           }
         }
+
+    }
+    
+    @objc func printValue() {
+        var count = Int()
+        
+        var date = Date()
+        var minuteFormatter = DateFormatter()
+        var hourFormatter = DateFormatter()
+
+        hourFormatter.dateFormat = "HH"
+        minuteFormatter.dateFormat = "mm"
+        
+        var currentMinuteString = minuteFormatter.string(from: Date())
+        var currentHourString = hourFormatter.string(from: Date())
+        
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+        if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+
+            print("post:", post)
+
+            var stage4: Dictionary<String, AnyObject>
+            stage4 = post["stage4"] as? [String : AnyObject] ?? [:]
+            
+            var timeJson: Dictionary<String, AnyObject>
+            timeJson = stage4["json"] as? [String: AnyObject] ?? [:]
+            
+            var timeDic: Dictionary<String, AnyObject>
+            timeDic = timeJson[currentHourString] as? [String: AnyObject] ?? [:]
+            
+            var userCount = timeDic[currentMinuteString] as? Int ?? 0
+
+            if let _ = timeDic[currentMinuteString] {
+            } else {
+                timeDic[currentMinuteString] = userCount as AnyObject
+                userCount += 1
+            }
+            if let _ = stage4[uid] {
+                if let _ = timeJson[currentHourString] {
+                } else {
+                    timeJson[currentHourString] = timeDic as AnyObject
+                }
+            } else {
+                // Star the post and add self to stars
+//                userCount += 1
+//                stage4[uid] = true as AnyObject
+            }
+            stage4["json"] = timeJson as AnyObject?
+            post["userCount"] = userCount as AnyObject?
+            post["stage4"] = stage4 as AnyObject?
+            currentData.value = post
+          return TransactionResult.success(withValue: currentData)
+        }
+        return TransactionResult.success(withValue: currentData)
+      }) { (error, committed, snapshot) in
+        if let error = error {
+          print(error.localizedDescription)
+        }
+      }
     }
     
 

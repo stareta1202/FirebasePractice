@@ -55,7 +55,7 @@ class MainViewController: BaseViewController {
         }
         view.add(stage3Button) {
             $0.setTitle("stage3", for: .normal)
-            $0.backgroundColor = .red
+            $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage2Button.snp.bottom).offset(12)
