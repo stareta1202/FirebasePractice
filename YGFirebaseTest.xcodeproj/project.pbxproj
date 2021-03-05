@@ -23,6 +23,7 @@
 		C93839A325F05B4E00F9CE09 /* StageFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */; };
 		C93839A625F082C500F9CE09 /* TestPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A525F082C500F9CE09 /* TestPageViewController.swift */; };
 		C93839A925F0B47000F9CE09 /* StageFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */; };
+		C93839AC25F0D50300F9CE09 /* StageSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */; };
 		DF3FD3F19EA4BBBC3A99631D /* Pods_YGFirebaseTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageFourViewController.swift; sourceTree = "<group>"; };
 		C93839A525F082C500F9CE09 /* TestPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPageViewController.swift; sourceTree = "<group>"; };
 		C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageFiveViewController.swift; sourceTree = "<group>"; };
+		C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSixViewController.swift; sourceTree = "<group>"; };
 		E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YGFirebaseTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				C93839A225F05B4E00F9CE09 /* StageFourViewController.swift */,
 				C93839A525F082C500F9CE09 /* TestPageViewController.swift */,
 				C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */,
+				C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */,
 			);
 			path = Stage;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				C938398F25EF68D100F9CE09 /* StageThreeViewController.swift in Sources */,
 				C938392725EF1FD700F9CE09 /* ViewController.swift in Sources */,
 				C938392325EF1FD700F9CE09 /* AppDelegate.swift in Sources */,
+				C93839AC25F0D50300F9CE09 /* StageSixViewController.swift in Sources */,
 				C938392525EF1FD700F9CE09 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

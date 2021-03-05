@@ -107,9 +107,7 @@ class StageFourViewController: UIViewController {
                     timeJson[currentHourString] = timeDic as AnyObject
                 }
             } else {
-                // Star the post and add self to stars
-//                userCount += 1
-//                stage4[uid] = true as AnyObject
+
             }
             timeDic[currentMinuteString]! += self.globalCount as Int
             timeJson[currentHourString] = timeDic as AnyObject?

@@ -75,7 +75,7 @@ class MainViewController: BaseViewController {
         }
         view.add(stage5Button) {
             $0.setTitle("stage5", for: .normal)
-            $0.backgroundColor = .red
+            $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage4Button.snp.bottom).offset(12)
@@ -90,6 +90,8 @@ class MainViewController: BaseViewController {
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage5Button.snp.bottom).offset(12)
             }
+            $0.addTarget(self, action: #selector(self.showStageSix), for: .touchUpInside)
+
         }
         view.add(stage7Button) {
             $0.setTitle("stage7", for: .normal)
@@ -154,6 +156,9 @@ class MainViewController: BaseViewController {
     }
     @objc func showStageFive() {
         self.present(StageFiveViewController(), animated: true, completion: nil)
+    }
+    @objc func showStageSix() {
+        self.present(StageSixViewController(), animated: true, completion: nil)
     }
     
     
