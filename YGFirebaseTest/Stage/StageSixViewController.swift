@@ -99,7 +99,7 @@ class StageSixViewController: UIViewController {
     
     // ? 함수로 한번만 실행이 되는 것인데 옵저빙이 가능할까..?
     func action() {
-        mTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.nothing), userInfo: nil, repeats: self.trigger)
+      
 
     }
     @objc func printValue() {
