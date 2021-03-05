@@ -25,6 +25,8 @@
 		C93839A925F0B47000F9CE09 /* StageFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */; };
 		C93839AC25F0D50300F9CE09 /* StageSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */; };
 		C93839AF25F1C19200F9CE09 /* StageSevenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839AE25F1C19200F9CE09 /* StageSevenViewController.swift */; };
+		C93839B225F1C80100F9CE09 /* StageEightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839B125F1C80100F9CE09 /* StageEightViewController.swift */; };
+		C93839B525F1EBB300F9CE09 /* StageNineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93839B425F1EBB300F9CE09 /* StageNineViewController.swift */; };
 		DF3FD3F19EA4BBBC3A99631D /* Pods_YGFirebaseTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageFiveViewController.swift; sourceTree = "<group>"; };
 		C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSixViewController.swift; sourceTree = "<group>"; };
 		C93839AE25F1C19200F9CE09 /* StageSevenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSevenViewController.swift; sourceTree = "<group>"; };
+		C93839B125F1C80100F9CE09 /* StageEightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEightViewController.swift; sourceTree = "<group>"; };
+		C93839B425F1EBB300F9CE09 /* StageNineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageNineViewController.swift; sourceTree = "<group>"; };
 		E780D6781396C7A3D8B4D67D /* Pods_YGFirebaseTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YGFirebaseTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,6 +135,8 @@
 				C93839A825F0B47000F9CE09 /* StageFiveViewController.swift */,
 				C93839AB25F0D50300F9CE09 /* StageSixViewController.swift */,
 				C93839AE25F1C19200F9CE09 /* StageSevenViewController.swift */,
+				C93839B125F1C80100F9CE09 /* StageEightViewController.swift */,
+				C93839B425F1EBB300F9CE09 /* StageNineViewController.swift */,
 			);
 			path = Stage;
 			sourceTree = "<group>";
@@ -263,7 +269,9 @@
 				C938395225EF277B00F9CE09 /* BaseViewController.swift in Sources */,
 				C938394A25EF24F500F9CE09 /* UIView+ext.swift in Sources */,
 				C938395625EF299F00F9CE09 /* StageOneViewController.swift in Sources */,
+				C93839B525F1EBB300F9CE09 /* StageNineViewController.swift in Sources */,
 				C938398C25EF67FE00F9CE09 /* StageTwoViewController.swift in Sources */,
+				C93839B225F1C80100F9CE09 /* StageEightViewController.swift in Sources */,
 				C93839A625F082C500F9CE09 /* TestPageViewController.swift in Sources */,
 				C93839AF25F1C19200F9CE09 /* StageSevenViewController.swift in Sources */,
 				C93839A325F05B4E00F9CE09 /* StageFourViewController.swift in Sources */,

@@ -18,6 +18,7 @@ class TestPageViewController: UIViewController {
     var otherTextField = UITextField()
     var ref: DatabaseReference!
     
+    
     var date = Date()
     var minuteFormatter = DateFormatter()
     var hourFormatter = DateFormatter()
@@ -66,19 +67,21 @@ class TestPageViewController: UIViewController {
             }
         }
         view.add(printButton) {
-            $0.setTitle("출력버튼", for: .normal)
+            $0.setTitle("스테이지8세팅 버튼", for: .normal)
             $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(12)
             }
+            $0.addTarget(self, action: #selector(self.stage8), for: .touchUpInside)
+
         }
     }
     @objc func action() {
-        ref.child("stage5/user").setValue(["박준태":"01027444114","정육각":"1234"])
-//        ref.child("stage5/user/박준태").setValue(["01027444114"])
-//        ref.child("stage5/user/정육각").setValue("01027444114")
-        ref.child("stage5/target").setValue(["name":"박준태"])
+        ref.child("test").observe(.childAdded) { (snapshot) in
+//            self.ref.child("tes
+            
+        }
         
     }
     @objc func secondAction() {
@@ -142,16 +145,15 @@ class TestPageViewController: UIViewController {
         }
       }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func stage8() {
+        for hour in 0 ..< 24 {
+            for minute in 0 ..< 60 {
+                ref.child("stage8/json/\(hour)/\(minute)").setValue(["flag": false, "number":0])
+            }
+        }
     }
-    */
+    private func observing() {
+        
+    }
 
 }

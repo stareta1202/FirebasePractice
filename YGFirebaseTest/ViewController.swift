@@ -95,7 +95,7 @@ class MainViewController: BaseViewController {
         }
         view.add(stage7Button) {
             $0.setTitle("stage7", for: .normal)
-            $0.backgroundColor = .red
+            $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage6Button.snp.bottom).offset(12)
@@ -110,14 +110,18 @@ class MainViewController: BaseViewController {
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage7Button.snp.bottom).offset(12)
             }
+            $0.addTarget(self, action: #selector(self.showStageEight), for: .touchUpInside)
+
         }
         view.add(stage9Button) {
             $0.setTitle("stage9", for: .normal)
-            $0.backgroundColor = .red
+            $0.backgroundColor = .black
             $0.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.top.equalTo(self.stage8Button.snp.bottom).offset(12)
             }
+            $0.addTarget(self, action: #selector(self.showStageNine), for: .touchUpInside)
+
         }
         view.add(explainLabel) {
             $0.text = "애매하거나 모르는 것 빨강, 확실한 것 검정"
@@ -164,6 +168,12 @@ class MainViewController: BaseViewController {
     }
     @objc func showStageSeven() {
         self.present(StageSevenViewController(),animated: true, completion: nil)
+    }
+    @objc func showStageEight() {
+        self.present(StageEightViewController(), animated: true, completion: nil)
+    }
+    @objc func showStageNine() {
+        self.present(StageNineViewController(), animated: true, completion: nil)
     }
     
     
