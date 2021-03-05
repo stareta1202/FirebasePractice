@@ -1,4 +1,6 @@
 # FirebasePractice
 This repo is for praticing firebase(database, auth) and login page 
 
-## hello
+## stage1 
+> access value and create value
+> used ```.setValue```
