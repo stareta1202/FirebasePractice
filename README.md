@@ -1,6 +1,6 @@
 # FirebasePractice
 This repo is for praticing firebase(database, auth) and login page 
-
+[Firebase Tutorial/Explanation from Google](https://firebase.google.com/docs/database/ios/read-and-write)
 ## stage1 
 > access value and create value
 > used ```.setValue```
@@ -60,3 +60,47 @@ This repo is for praticing firebase(database, auth) and login page
         }
     }
 ```
+
+## stage8 
+> use Transaction which "Using a transaction prevents star counts from being incorrect if multiple users star the same post at the same time or the client had stale data. The value contained in the FIRMutableData class is initially the client's last known value for the path, or nil if there is none. The server compares the initial value against it's current value and accepts the transaction if the values match, or rejects it. If the transaction is rejected, the server returns the current value to the client, which runs the transaction again with the updated value. This repeats until the transaction is accepted or too many attempts have been made.
+
+``` Swift
+    func tempFunc() {
+        
+        if mTimer.isValid {
+            mTimer.invalidate()
+        }
+        
+        mTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(obcTempFunc), userInfo: nil, repeats: true)
+    }
+    
+    @objc func obcTempFunc() {
+        var date = Date()
+        self.stage8Ref.child("json/\(Calendar.current.component(.hour, from: Date()))/\(Calendar.current.component(.minute, from: Date()))").runTransactionBlock { (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String: AnyObject]{
+                print(post)
+                self.number = post["number"] as! Int ?? 0
+                self.flag = post["flag"] as! Bool
+                if self.flag {
+                    self.number += 1
+                }
+                print("number is?", self.number)
+                
+//                post["number"] = self.number as AnyObject?
+                post["number"] = self.number as AnyObject?
+                currentData.value = post
+                
+            }
+            return TransactionResult.success(withValue: currentData)
+        } andCompletionBlock: { (error, commit, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+        
+```
+
+## stage9 
+> Type casting
+
